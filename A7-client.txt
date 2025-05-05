@@ -1,0 +1,19 @@
+import requests
+
+BASE_URL = "http://127.0.0.1:5000"
+
+def request_operation(op, a, b):
+    response = requests.get(f"{BASE_URL}/{op}", params={"a": a, "b": b})
+    if response.status_code == 200:
+        print(f"{op.title()}({a}, {b}) = {response.json()['result']}")
+    else:
+        print(f"Error: {response.json().get('error')}")
+
+if __name__ == "__main__": 
+    a = int(input("Enter a: "))
+    b = int(input("Enter b: "))
+    request_operation('add', a, b)
+    request_operation('subtract', a, b)
+    request_operation('multiply', a, b)
+    request_operation('divide', a, b)  # will show division by zero error
+ 
